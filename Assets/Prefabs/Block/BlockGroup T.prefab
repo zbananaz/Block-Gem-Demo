@@ -913,6 +913,7 @@ GameObject:
   - component: {fileID: 8027515380985370504}
   - component: {fileID: 2217784287197516725}
   - component: {fileID: 4920652075285463130}
+  - component: {fileID: -7144991323569358491}
   m_Layer: 6
   m_Name: BlockGroup T
   m_TagString: Block
@@ -966,7 +967,7 @@ Rigidbody:
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
   m_UseGravity: 0
-  m_IsKinematic: 1
+  m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 116
   m_CollisionDetection: 1
@@ -1012,6 +1013,20 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 6, y: 2, z: 1.3}
   m_Center: {x: 0, y: 1, z: 0}
+--- !u!114 &-7144991323569358491
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5830937485939674164}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 98eb0bf317eb5504b8a9047a2bdb770a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  blockSize: 0
+  speed: 20
 --- !u!1 &6287437538697713609
 GameObject:
   m_ObjectHideFlags: 0

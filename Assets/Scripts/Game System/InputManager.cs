@@ -4,14 +4,14 @@ public class InputManager : MonoBehaviour
 {
     private Camera mainCamera;
     public GameObject selectedObject = null; // Vật thể đang được chọn
-    private float moveSpeed = 15f; // Tốc độ di chuyển
     private Vector3 targetPosition; // Vị trí mục tiêu khi kéo
     private Plane groundPlane; // Mặt phẳng để chọn vị trí
     private Rigidbody rb;
+    
+    [SerializeField]
+    private float speed = 10.0f; // Tốc độ di chuyển
     private bool isDragging = false; // Biến kiểm tra trạng thái kéo
-    Vector3 test;
- Vector3 touchWorldPosition    ; 
- void Start()
+    void Start()
     {
         mainCamera = Camera.main;
         groundPlane = new Plane(Vector3.up, Vector3.zero); // Mặt phẳng cố định ở Y = 0
@@ -23,7 +23,6 @@ public class InputManager : MonoBehaviour
         {
             Touch touch = Input.GetTouch(0);
             Vector3 touchWorldPosition = GetWorldPositionFromTouch(touch);
-            test = touchWorldPosition;
             switch (touch.phase)
             {
                 case TouchPhase.Began:
@@ -77,6 +76,7 @@ public class InputManager : MonoBehaviour
                         targetPosition = touchWorldPosition;
                         isDragging = false; // Dừng kéo
                         selectedObject = null;
+                        rb = null;
                     }
                     break;
             }
@@ -88,16 +88,11 @@ public class InputManager : MonoBehaviour
     {
         if (isDragging && selectedObject != null && rb != null)
         {
-             Touch touch = Input.GetTouch(0);
-             if(selectedObject!=null)
-             {
-                //  Vector3 mousePos = Vector3.Lerp(rb.position, targetPosition, moveSpeed * Time.fixedDeltaTime);
-                 rb.linearVelocity = test - selectedObject.transform.position ;
-             }else
-             {
-                 rb.linearVelocity = Vector3.zero;
-             }
-          
+           
+            //  Vector3 mousePos = Vector3.Lerp(rb.position, targetPosition, moveSpeed * Time.fixedDeltaTime);
+            rb.linearVelocity = 
+            (targetPosition - selectedObject.transform.position).normalized * speed;
+            Debug.Log(rb.linearVelocity);
         }
     }
 
@@ -123,7 +118,7 @@ public class InputManager : MonoBehaviour
         if (groundPlane.Raycast(ray, out float distance))
         {
             Vector3 worldPosition = ray.GetPoint(distance);
-            return new Vector3(worldPosition.x, 0, worldPosition.z); // Giữ nguyên Y
+            return new Vector3(worldPosition.x, 0.21f, worldPosition.z); // Giữ nguyên Y
         }
 
         return transform.position;

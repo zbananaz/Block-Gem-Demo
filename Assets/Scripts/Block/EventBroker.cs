@@ -18,5 +18,7 @@ public class EventBroker : MonoBehaviour
     }
 
     public UnityEvent<GameObject, GameObject> OnBlockCollided;
-    
+    public UnityEvent<GameObject> OnBlockSelected;
+    public UnityEvent<Vector3> OnBlockDeselected;
+    public UnityEvent<Vector3> OnBlockMoving;
 }

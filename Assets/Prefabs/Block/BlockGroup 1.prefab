@@ -406,6 +406,7 @@ GameObject:
   - component: {fileID: 6984874450791776932}
   - component: {fileID: 7554083638069475242}
   - component: {fileID: 8565133146946434568}
+  - component: {fileID: -3068963337116269490}
   m_Layer: 6
   m_Name: BlockGroup 1
   m_TagString: Block
@@ -477,10 +478,24 @@ Rigidbody:
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
   m_UseGravity: 0
-  m_IsKinematic: 1
+  m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 116
   m_CollisionDetection: 1
+--- !u!114 &-3068963337116269490
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5334848816079210753}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 98eb0bf317eb5504b8a9047a2bdb770a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  blockSize: 0
+  speed: 20
 --- !u!1 &5855152312528492542
 GameObject:
   m_ObjectHideFlags: 0
