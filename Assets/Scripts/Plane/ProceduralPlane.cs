@@ -24,6 +24,14 @@ public class ProceduralPlane : MonoBehaviour
         SetPosition();
     }
 
+    void Start()
+    {
+        EventBroker.instance.OnSendingGridSize?.Invoke(gridWidth, gridHeight, height, gridWidth);
+    }
+
+
+
+
     void CalculateCellSize()
     {
         float cellSizeX = width / gridWidth; // Kích thước ô theo chiều rộng
@@ -35,6 +43,7 @@ public class ProceduralPlane : MonoBehaviour
         // Cập nhật lại `width` và `height` để khớp với ô vuông
         width = cellSize * gridWidth;
         height = cellSize * gridHeight;
+        EventBroker.instance.OnSendingCellSize?.Invoke(cellSize);
     }
 
 

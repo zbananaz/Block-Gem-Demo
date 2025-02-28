@@ -1,31 +1,40 @@
+using System;
+using UnityEditor.ShaderGraph.Internal;
 using UnityEngine;
 
 public class GridManager : MonoBehaviour
 {
     public GameObject gridPrefab; // Prefab của mỗi ô Grid
-    private ProceduralPlane plane;
     private Vector3[,] gridPositions; // Lưu vị trí từng ô trên Grid
     private float cellSize; // Kích thước của mỗi ô
+    private int gridWidth;
+    private int gridHeight;
+    private float halfWidth;
+    private float halfHeight;
 
     void Start()
     {
-        plane = GetComponent<ProceduralPlane>();
-        if (plane == null)
-        {
-            Debug.LogError("Không tìm thấy ProceduralPlane trên GameObject!");
-            return;
-        }
-
-        cellSize = plane.width / plane.gridWidth; // Lấy `cellSize` từ ProceduralPlane
+        EventBroker.instance.OnSendingCellSize.AddListener(HandleSendingCellSize);
+        EventBroker.instance.OnSendingGridSize.AddListener(HandleSendingGridSize);
         GenerateGrid();
+    }
+
+    private void HandleSendingGridSize(int gWidth, int gHeight, float w, float h)
+    {
+        gridWidth = gWidth;
+        gridHeight = gHeight;
+        halfWidth = w/2;
+        halfHeight = h/2;
+    }
+
+    private void HandleSendingCellSize(float arg0)
+    {
+        cellSize = arg0;
     }
 
     void GenerateGrid()
     {
-        int gridWidth = plane.gridWidth;
-        int gridHeight = plane.gridHeight;
-        float halfWidth = plane.width / 2;
-        float halfHeight = plane.height / 2;
+        
 
         gridPositions = new Vector3[gridWidth, gridHeight];
 
@@ -41,7 +50,6 @@ public class GridManager : MonoBehaviour
                 );
 
                 gridPositions[x, z] = position;
-                Debug.Log("Cell Pos: " + "["+x + ", " + z + "]");
                 // Tạo một ô Grid tại vị trí tính toán
                 SpawnGridCell(position);
             }
